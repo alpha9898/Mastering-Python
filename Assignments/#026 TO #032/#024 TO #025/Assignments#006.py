@@ -44,5 +44,5 @@ print(f"{key[0]} Progress Is {skills[key[0]]}")
 print(f"{key[1]} Progress Is {skills[key[1]]}")
 print(f"{key[2]} Progress Is {skills[key[2]]}")
 print(f"{key[3]} Progress Is {skills[key[3]]}")
-print(f"{key[4]} Progress Is {skills[key[4]]}")
+
 
