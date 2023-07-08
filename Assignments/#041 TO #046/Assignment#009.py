@@ -31,12 +31,12 @@ minutes = hours * 60
 seconds = minutes * 60
 
 if age >10 and age < 100:
-  print("your age is good")
-  print(f"Your Age In Months Is {months} Months")
-  print(f"Your Age In Weeks Is {weeks} Weeks")
+    print("your age is good")
+    print(f"Your Age In Months Is {months} Months")
+    print(f"Your Age In Weeks Is {weeks} Weeks")
 
 else:
-  print("your age is not good")
+    print("your age is not good")
 print("=" * 30)
 
 country = input("Input Your Country ").strip()
