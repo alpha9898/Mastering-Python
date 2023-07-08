@@ -6,15 +6,15 @@ operation = input("Enter Operation: ").strip()
 if operation == "+":
     print(f"{num1} + {num2} = {int(num1) + int(num2)}")
 elif operation == "-":
-  print(f"{num1} - {num2} = {int(num1) - int(num2)}")
+    print(f"{num1} - {num2} = {int(num1) - int(num2)}")
 elif operation == "*":
-  print(f"{num1} * {num2} = {int(num1) * int(num2)}")
+    print(f"{num1} * {num2} = {int(num1) * int(num2)}")
 elif operation == "/":
-  print(f"{num1} / {num2} = {int(num1) / int(num2)}")
+    print(f"{num1} / {num2} = {int(num1) / int(num2)}")
 elif operation == "%":
-  print(f"{num1} % {num2} = {int(num1) % int(num2)}")
+    print(f"{num1} % {num2} = {int(num1) % int(num2)}")
 else:
-  print("Erorr")
+    print("Erorr")
 print("=" * 30)
 
 age = int(input("What\'s Your Age ?"))
