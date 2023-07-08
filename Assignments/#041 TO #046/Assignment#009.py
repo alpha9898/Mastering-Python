@@ -49,3 +49,4 @@ if country in countries:
         f"Your Country Eligible For Discount And The Price After Discount Is {price - discount}")
 else:
     print(f"Your Country Not Eligible For Discount And The Price Is {price}")
+print("=" * 30)
