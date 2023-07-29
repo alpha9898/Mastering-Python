@@ -8,7 +8,7 @@ class Solution:
                 if late > 2:
                     return False
             else:
-                late = 0  # Reset the late count when there's no 'L'
+                late = 0 
                 if char == "A":
                     absent += 1
                     if absent > 1:
