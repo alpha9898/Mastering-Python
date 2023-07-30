@@ -14,3 +14,4 @@ class Solution:
                     if absent > 1:
                         return False
         return True
+        
