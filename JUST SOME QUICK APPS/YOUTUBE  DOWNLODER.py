@@ -19,7 +19,6 @@ def download_youtube_video(url):
         video_title = yt.title
         video_duration_seconds = yt.length
 
-        # Display video details
         print("Video Title:", video_title)
 
         # Get video length in hours, minutes, and seconds
