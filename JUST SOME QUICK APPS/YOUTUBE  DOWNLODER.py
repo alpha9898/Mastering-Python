@@ -65,6 +65,8 @@ def download_youtube_video(url):
 
         # Set the destination path on the D: drive
         destination_path = "D:"
+        video_stream.download(output_path=destination_path)
+        print("Download complete!")
 
         # Download the video
         print("Downloading...")
