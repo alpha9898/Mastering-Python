@@ -1,3 +1,6 @@
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import filedialog
 from pytube import YouTube
 
 def get_file_size(bytes):
@@ -10,73 +13,95 @@ def get_video_length(seconds):
     hours, minutes = divmod(minutes, 60)
     return hours, minutes, seconds
 
-def download_youtube_video(url):
+def download_youtube_video():
+    url = url_entry.get()
+    choice = resolution_var.get()
+
     try:
-        # Create a YouTube object
         yt = YouTube(url)
+        video_stream = None
 
-        # Get video details
-        video_title = yt.title
-        video_duration_seconds = yt.length
-
-        print("Video Title:", video_title)
-
-        # Get video length in hours, minutes, and seconds
-        hours, minutes, seconds = get_video_length(video_duration_seconds)
-        print("Video Duration: {} hours, {} minutes, {} seconds".format(hours, minutes, seconds))
-
-        print("Available Video Resolutions:")
-        for stream in yt.streams.filter(only_video=True, file_extension="mp4"):
-            print(stream.resolution)
-
-        # Ask for the desired video quality
-        print("\nSelect the desired video quality:")
-        print("1. High Quality (1080p)")
-        print("2. Standard Quality (720p)")
-        print("3. Low Quality (360p)")
-        choice = int(input("Enter your choice (1, 2, or 3): "))
-
-        # Choose the appropriate stream
         if choice == 1:
-            video_stream = yt.streams.filter(res="1080p", file_extension="mp4").first()
-        elif choice == 2:
             video_stream = yt.streams.filter(res="720p", file_extension="mp4").first()
-        elif choice == 3:
+        elif choice == 2:
             video_stream = yt.streams.filter(res="360p", file_extension="mp4").first()
         else:
-            print("Invalid choice.")
+            messagebox.showerror("Error", "Invalid choice.")
             return
 
         if video_stream is None:
-            print("Selected video quality is not available. Please try another quality.")
+            messagebox.showerror("Error", "Selected video quality is not available. Please try another quality.")
             return
 
-        # Get the size of the video in MB
-        file_size = get_file_size(video_stream.filesize)
+        # Ask user to select the download location
+        destination_path = filedialog.askdirectory()
 
-        # Display video size
-        print("Video Size:", f"{file_size:.2f} MB")
+        if not destination_path:
+            return  # User canceled, do not proceed with the download
+
+        # Create a new window to display video details
+        details_window = tk.Toplevel()
+        details_window.title("Video Details")
+
+        # Get the size and duration of the video
+        file_size = get_file_size(video_stream.filesize)
+        hours, minutes, seconds = get_video_length(yt.length)
+
+        # Display video details
+        video_info = f"Video Title: {yt.title}\nVideo Duration: {hours} hours, {minutes} minutes, {seconds} seconds\nVideo Size: {file_size:.2f} MB\nDownload Location: {destination_path}"
+        info_label = tk.Label(details_window, text=video_info, wraplength=400, justify='left')
+        info_label.pack(padx=20, pady=20)
 
         # Ask for confirmation
-        confirm = input("Do you want to proceed with the download? (yes/no): ")
-        if confirm.lower() != "yes":
-            print("Download canceled.")
-            return
+        def confirm_download():
+            video_stream.download(output_path=destination_path)
+            messagebox.showinfo("Download Complete", "Video download complete!")
+            details_window.destroy()
 
-        # Set the destination path on the D: drive
-        destination_path = "D:"
-        video_stream.download(output_path=destination_path)
-        print("Download complete!")
+        confirm_button = tk.Button(details_window, text="Confirm Download", command=confirm_download)
+        confirm_button.pack(pady=10)
 
-        # Download the video
-        print("Downloading...")
-        video_stream.download(output_path=destination_path)
-        print("Download complete!")
-    except KeyboardInterrupt:
-        print("Download canceled by user.")
     except Exception as e:
-        print("An error occurred:", str(e))
+        messagebox.showerror("Error", "An error occurred: " + str(e))
 
-if __name__ == "__main__":
-    video_url = input("Enter the YouTube video URL: ")
-    download_youtube_video(video_url)
+# Create the main window
+root = tk.Tk()
+root.title("YouTube Video Downloader")
+
+# Calculate the x and y position for the window to be centered
+window_width = 500
+window_height = 300
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+x_position = (screen_width - window_width) // 2
+y_position = (screen_height - window_height) // 2
+
+# Set the window size and position
+root.geometry("{}x{}+{}+{}".format(window_width, window_height, x_position, y_position))
+
+# Create URL entry field
+url_label = tk.Label(root, text="Enter YouTube Video URL:")
+url_label.pack(pady=10)
+url_entry = tk.Entry(root, width=40)
+url_entry.pack(pady=5)
+
+# Create resolution choice options
+resolution_label = tk.Label(root, text="Select Video Resolution:")
+resolution_label.pack(pady=5)
+resolution_var = tk.IntVar()
+resolution_var.set(1)
+resolution_choices = [
+    ("Standard Quality (720p)", 1),
+    ("Low Quality (360p)", 2)
+]
+
+for text, val in resolution_choices:
+    resolution_radio = tk.Radiobutton(root, text=text, variable=resolution_var, value=val)
+    resolution_radio.pack(anchor=tk.W)
+
+# Create download button
+download_button = tk.Button(root, text="Download", command=download_youtube_video)
+download_button.pack(pady=10)
+
+# Start the main event loop
+root.mainloop()
