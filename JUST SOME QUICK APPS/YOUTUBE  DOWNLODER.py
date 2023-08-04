@@ -117,5 +117,5 @@ download_button.pack(pady=10)
 
 # Start the main event loop
 root.mainloop()
-# next step is make these app to exe file and make it more user friendly
-# and also add some more features like download playlist and download audio only
+# todo: and also add some more features like download playlist and download audio only
+# todo: next step is make these app to exe file and make it more user friendly
