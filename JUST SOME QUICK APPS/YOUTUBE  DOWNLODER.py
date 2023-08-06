@@ -150,7 +150,7 @@ download_playlist_button.pack(pady=10)
 root.mainloop()
 
 
-# ****************todo list *****************
+# todo list *****************
 # todo : add download playlist
 # todo : add download audio only
 # todo : add download video only
