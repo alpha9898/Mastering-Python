@@ -169,4 +169,4 @@ root.mainloop()
 # todo : make icon for the app
 # todo : make the app responsive
 # todo : make the app look better
-# ***************(done)****************
+# ***************(done)***************
