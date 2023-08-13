@@ -107,20 +107,24 @@ def download_playlist():
 # Create the main window
 root = tk.Tk()
 root.title("YouTube Video Downloader")
-root.geometry("500x350")
-
-# Set the window background color to #393E41
+root.geometry("600x400")
 root.configure(bg="#393E41")
+
+# Configure rows and columns to expand proportionally
+root.columnconfigure(0, weight=1)
+root.rowconfigure(1, weight=1)
 
 # Create URL entry field
 url_label = tk.Label(root, text="Enter YouTube Video URL or Playlist URL:", font=("Arial", 14), bg="#393E41", fg="white")
-url_label.pack(pady=10)
-url_entry = tk.Entry(root, width=50, font=("Arial", 12))
-url_entry.pack(pady=5)
+url_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+
+url_entry = tk.Entry(root, font=("Arial", 12))
+url_entry.grid(row=1, column=0, padx=10, pady=5, sticky="we")
 
 # Create resolution choice options
 resolution_label = tk.Label(root, text="Select Video Resolution:", font=("Arial", 14), bg="#393E41", fg="white")
-resolution_label.pack(pady=5)
+resolution_label.grid(row=2, column=0, padx=10, pady=5, sticky="w")
+
 resolution_var = tk.IntVar()
 resolution_var.set(1)
 resolution_choices = [
@@ -128,32 +132,27 @@ resolution_choices = [
     ("Low Quality (360p)", 2)
 ]
 
-for text, val in resolution_choices:
+for idx, (text, val) in enumerate(resolution_choices, start=3):
     resolution_radio = tk.Radiobutton(root, text=text, variable=resolution_var, value=val, font=("Arial", 12), bg="#393E41", fg="white", selectcolor="#393E41")
-    resolution_radio.pack(anchor=tk.W)
+    resolution_radio.grid(row=idx, column=0, padx=10, pady=2, sticky="w")
 
 # Create destination folder button
 destination_folder_button = tk.Button(root, text="Choose Destination Folder", font=("Arial", 14), bg="#3F88C5", fg="white", command=choose_destination_folder)
-destination_folder_button.pack(pady=5)
-
-destination_path = ""
+destination_folder_button.grid(row=idx+1, column=0, padx=10, pady=5, sticky="we")
 
 # Create download single video button
 download_single_button = tk.Button(root, text="Download Single Video", font=("Arial", 14), bg="#22816E", fg="white", command=download_single_video)
-download_single_button.pack(pady=10)
+download_single_button.grid(row=idx+2, column=0, padx=10, pady=10, sticky="we")
 
 # Create download playlist button
 download_playlist_button = tk.Button(root, text="Download Playlist", font=("Arial", 14), bg="#22816E", fg="white", command=download_playlist)
-download_playlist_button.pack(pady=10)
+download_playlist_button.grid(row=idx+3, column=0, padx=10, pady=10, sticky="we")
 
 # Start the main event loop
 root.mainloop()
 
-
 # todo list **************
-# todo : add download playlist
 # todo : add download audio only
-# todo : add download video only
 # todo : add download thumbnail
 # todo : add download subtitle
 # todo : add download progress bar
@@ -167,6 +166,4 @@ root.mainloop()
 # todo : add download resume button
 # todo : make these app to exe file   https://www.youtube.com/watch?v=UZX5kH72Yx4
 # todo : make icon for the app
-# todo : make the app responsive
-# todo : make the app look better
 # ***************(done)***************
