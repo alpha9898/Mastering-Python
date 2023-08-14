@@ -152,18 +152,6 @@ download_playlist_button.grid(row=idx+3, column=0, padx=10, pady=10, sticky="we"
 root.mainloop()
 
 # todo list **************
-# todo : add download audio only
-# todo : add download thumbnail
-# todo : add download subtitle
-# todo : add download progress bar
-# todo : add download speed
-# todo : add download percentage
-# todo : add download time remaining
-# todo : add download time elapsed
-# todo : add download time total
-# todo : add download cancel button
-# todo : add download pause button
-# todo : add download resume button
 # todo : make these app to exe file   https://www.youtube.com/watch?v=UZX5kH72Yx4
 # todo : make icon for the app
 # ***************(done)***************
