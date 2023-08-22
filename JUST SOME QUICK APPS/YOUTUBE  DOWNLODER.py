@@ -154,4 +154,4 @@ root.mainloop()
 # todo list **********
 # todo : make these app to exe file   https://www.youtube.com/watch?v=UZX5kH72Yx4
 # todo : make icon for the app
-# ***************(done)*************
+# ***************(done)************
