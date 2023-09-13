@@ -134,6 +134,7 @@ resolution_choices = [
 
 for idx, (text, val) in enumerate(resolution_choices, start=3):
     resolution_radio = tk.Radiobutton(root, text=text, variable=resolution_var, value=val, font=("Arial", 12), bg="#393E41", fg="white", selectcolor="#393E41")
+    
     resolution_radio.grid(row=idx, column=0, padx=10, pady=2, sticky="w")
 
 # Create destination folder button
