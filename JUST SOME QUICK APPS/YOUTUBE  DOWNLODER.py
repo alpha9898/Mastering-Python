@@ -138,6 +138,7 @@ for idx, (text, val) in enumerate(resolution_choices, start=3):
 
 # Create destination folder button
 destination_folder_button = tk.Button(root, text="Choose Destination Folder", font=("Arial", 14), bg="#3F88C5", fg="white", command=choose_destination_folder)
+
 destination_folder_button.grid(row=idx+1, column=0, padx=10, pady=5, sticky="we")
 
 # Create download single video button
